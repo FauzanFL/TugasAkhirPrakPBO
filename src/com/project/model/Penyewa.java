@@ -2,10 +2,10 @@ package com.project.model;
 
 public class Penyewa {
     private Mobil mobil;
-    private String nama, umur, alamat;
+    private String nama, alamat;
+    private int umur;
 
-    public Penyewa(Mobil mobil, String nama, String umur, String alamat) {
-        this.mobil = mobil;
+    public Penyewa(String nama, int umur, String alamat) {
         this.nama = nama;
         this.umur = umur;
         this.alamat = alamat;
@@ -27,11 +27,11 @@ public class Penyewa {
         this.nama = nama;
     }
 
-    public String getUmur() {
+    public int getUmur() {
         return umur;
     }
 
-    public void setUmur(String umur) {
+    public void setUmur(int umur) {
         this.umur = umur;
     }
 

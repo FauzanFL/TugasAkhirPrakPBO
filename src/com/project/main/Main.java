@@ -1,10 +1,15 @@
 package com.project.main;
 
+import com.project.model.Login;
+import com.project.model.Penyewa;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        Login login = null;
+        Penyewa penyewa;
 
         System.out.println("----------------------------------------");
         System.out.println("||<===== RENTAL MOBIL AMAOZAN =====>||");
@@ -36,6 +41,9 @@ public class Main {
                 System.out.println("Password = ");
                 String pass = input.next();
 
+                login = new Login(user,pass);
+                penyewa = new Penyewa(nama,umur,alamat);
+
                 break;
 
             case 2:
@@ -46,40 +54,49 @@ public class Main {
 
                 System.out.print("Password = ");
                 String passlog = input.next();
-
-                break;
-        }
-        System.out.println("||<=====================================");
-        System.out.println("1. Cek Mobil        ||2. Sewa Mobil     ");
-        System.out.println("3. Pembayaran       ||4. Nota Pembayaran     ");
-        System.out.println("||<=====================================");
-
-        System.out.print("\nSilahkan lakukan = ");
-        int milih2 = input.nextInt();
-
-        switch (milih2) {
-
-            case 1:
-                System.out.println("\n|| Cek Mobil Ready ||");
-                System.out.println("1. Avanza");
-                System.out.println("2. Xenia");
-                System.out.println("3. Apv");
-                System.out.println("4. Brio");
-                System.out.println("5. Jazz");
-                System.out.println("6. Yaris");
-
-                break;
-
-            case 2:
-                System.out.println("\n|| Sewa Mobil  ||");
-                System.out.println("Nama Penyewa : ");
-                String penyewa = input.next();
-
-
-
+                afterLogin(userlog,passlog,login);
 
 
         }
 
+    }
+
+
+    public static void afterLogin(String userlog, String passlog, Login login){
+        Scanner input = new Scanner(System.in);
+        if (login.getUsername().equals(userlog) && login.getPassword().equals(passlog)){
+            System.out.println("||<=====================================");
+            System.out.println("1. Cek Mobil        ||2. Sewa Mobil     ");
+            System.out.println("3. Pembayaran       ||4. Nota Pembayaran     ");
+            System.out.println("||<=====================================");
+
+            System.out.print("\nSilahkan lakukan = ");
+            int milih2 = input.nextInt();
+
+            switch (milih2) {
+
+                case 1:
+                    System.out.println("\n|| Cek Mobil Ready ||");
+                    System.out.println("1. Avanza");
+                    System.out.println("2. Xenia");
+                    System.out.println("3. Apv");
+                    System.out.println("4. Brio");
+                    System.out.println("5. Jazz");
+                    System.out.println("6. Yaris");
+
+                    break;
+
+                case 2:
+                    System.out.println("\n|| Sewa Mobil  ||");
+                    System.out.println("Pilih mobil : ");
+                    String mobil = input.next();
+
+                    break;
+
+            }
+
+        } else {
+
+        }
     }
 }
