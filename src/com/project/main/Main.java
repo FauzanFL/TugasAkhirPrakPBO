@@ -95,51 +95,84 @@ public class Main {
         login = new Login(nama,user, pass,3);
         penyewa = new Penyewa(nama, umur, alamat);
         listLogin.add(login);
+
+        System.out.println("\nBerhasil mendaftar!");
     }
 
     private static void login(){
         Scanner input = new Scanner(System.in);
+        String username = "";
+        String password = "";
+        String nama = "";
+        int role = 0;
+
         clearScreen();
 
-        boolean ulangi = true;
+        System.out.println();
+        System.out.println("\n||===== Login =====||");
+        System.out.print("Username = ");
+        String userlog = input.next();
 
-        while (ulangi){
-            System.out.println();
-            System.out.println("\n||===== Login =====||");
-            System.out.print("Username = ");
-            String userlog = input.next();
+        System.out.print("Password = ");
+        String passlog = input.next();
+        try {
 
-            System.out.print("Password = ");
-            String passlog = input.next();
-            try {
-                for (int i = 0; i < listLogin.size(); i++) {
-                    if (listLogin.get(i).getUsername().equals(userlog) && listLogin.get(i).getPassword().equals(passlog) && listLogin.get(i).getRole()==1){
-                        afterLoginPemilik();
-                        ulangi = false;
-                    } else if (listLogin.get(i).getUsername().equals(userlog) && listLogin.get(i).getPassword().equals(passlog) && listLogin.get(i).getRole()==2) {
-                        String nama = listLogin.get(i).getNama();
-                        afterLoginPegawai(nama);
-                        ulangi = false;
-                    } else if (listLogin.get(i).getUsername().equals(userlog) && listLogin.get(i).getPassword().equals(passlog) && listLogin.get(i).getRole()==3) {
-                        afterLoginPenyewa();
-                        ulangi = false;
-                    } else {
-                        System.out.println("Username dan password salah!");
+            for (int i = 0; i < listLogin.size(); i++) {
+                if (listLogin.get(i).getUsername().equals(userlog) && listLogin.get(i).getPassword().equals(passlog)){
+                    username = listLogin.get(i).getUsername();
+                    password = listLogin.get(i).getPassword();
+                    role = listLogin.get(i).getRole();
+                    nama = listLogin.get(i).getNama();
+                    break;
+                }
 
-                        System.out.print("Ulangi?(y/n): ");
-                        char c = input.next().charAt(0);
-                        if (c == 'y' || c =='Y'){
-                            ulangi = true;
-                        } else {
-                            ulangi = false;
-                            home();
+            }
+                if (username.equals(userlog) && password.equals(passlog) && role==1){
+                    afterLoginPemilik();
+                } else if (username.equals(userlog) && password.equals(passlog) && role==2) {
+                    afterLoginPegawai(nama);
+                } else if (username.equals(userlog) && password.equals(passlog) && role==3) {
+                    afterLoginPenyewa();
+                } else {
+                    System.out.println("Username dan password salah!");
+                    clearScreen();
+
+                    System.out.println();
+                    System.out.println("\n||===== Login =====||");
+                    System.out.print("Username = ");
+                    userlog = input.next();
+
+                    System.out.print("Password = ");
+                    passlog = input.next();
+                    try {
+                        for (int i = 0; i < listLogin.size(); i++) {
+                            if (listLogin.get(i).getUsername().equals(userlog) && listLogin.get(i).getPassword().equals(passlog)){
+                                username = listLogin.get(i).getUsername();
+                                password = listLogin.get(i).getPassword();
+                                role = listLogin.get(i).getRole();
+                                nama = listLogin.get(i).getNama();
+                                break;
+                            }
                         }
+                        if (username.equals(userlog) && password.equals(passlog) && role==1){
+                            afterLoginPemilik();
+                        } else if (username.equals(userlog) && password.equals(passlog) && role==2) {
+                            afterLoginPegawai(nama);
+                        } else if (username.equals(userlog) && password.equals(passlog) && role==3) {
+                            afterLoginPenyewa();
+                        } else {
+                            System.out.println("Username dan password salah!");
+                            login();
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.println("Belum ada data login");
+                        home();
                     }
                 }
-            } catch (NullPointerException e) {
-                System.out.println("Belum ada data login");
-                home();
-            }
+
+        } catch (NullPointerException e) {
+            System.out.println("Belum ada data login");
+            home();
         }
 
 
@@ -201,30 +234,36 @@ public class Main {
             case 1:
                 boolean back = false;
                 System.out.println("\n|| Cek Mobil Ready ||");
-                try {
-                    while (back == false){
-                        for (int i = 0; i < listMobil.size(); i++) {
-                            System.out.println("----------------------------------------");
-                            System.out.println((i + 1) + ". " + listMobil.get(i).getJenisMobil());
-                            listMobil.get(i).tampilMobil();
-                            System.out.println("----------------------------------------");
+
+                if (listMobil.size() == 0){
+                    System.out.println("Belum ada data Mobil!");
+                } else {
+                    try {
+                        while (back == false){
+                            for (int i = 0; i < listMobil.size(); i++) {
+                                System.out.println("----------------------------------------");
+                                System.out.println((i + 1) + ". " + listMobil.get(i).getJenisMobil());
+                                listMobil.get(i).tampilMobil();
+                                System.out.println("----------------------------------------");
+                            }
+
+                            System.out.print("Kembali?(y/n)");
+                            char kembali = inputChar.next().charAt(0);
+
+                            if (kembali == 'y' || kembali == 'Y'){
+                                back = true;
+                                afterLoginPenyewa();
+                            } else {
+                                back = false;
+                            }
                         }
 
-                        System.out.print("Kembali?(y/n)");
-                        char kembali = inputChar.next().charAt(0);
-
-                        if (kembali == 'y' || kembali == 'Y'){
-                            back = true;
-                            afterLoginPenyewa();
-                        } else {
-                            back = false;
-                        }
+                    } catch (NullPointerException e) {
+                        System.out.println("Belum ada data mobil");
+                        afterLoginPenyewa();
                     }
-
-                } catch (NullPointerException e) {
-                    System.out.println("Belum ada data mobil");
-                    afterLoginPenyewa();
                 }
+
 
                 break;
 
@@ -234,12 +273,13 @@ public class Main {
                 while (ulang){
                     System.out.println("\n|| Sewa Mobil  ||");
 
+
                     pemilik.tampilPegawai();
 
-                    System.out.println("Pilih pegawai : ");
+                    System.out.print("Pilih pegawai (masukkan nama) : ");
                     String pegawai = inputStr.next();
 
-                    System.out.println("Pilih mobil : ");
+                    System.out.print("Pilih mobil (masukkan nama) : ");
                     String mobil = inputStr.next();
                     int index = 0;
                     boolean ketemu = false;
