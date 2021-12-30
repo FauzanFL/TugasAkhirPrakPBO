@@ -47,8 +47,9 @@ public class Pemilik extends Pegawai {
     }
 
     public void tampilPegawai(){
+        System.out.println("1. "+nama);
         for (int i = 0; i < listPegawai.size(); i++) {
-            System.out.println((i+1)+". "+listPegawai.get(i).getNama());
+            System.out.println((i+2)+". "+listPegawai.get(i).getNama());
         }
     }
 
