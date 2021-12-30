@@ -44,9 +44,11 @@ public class Penyewa {
     }
 
     public void tampilData(){
-        mobil.tampilMobil();
+        System.out.println("==============================");
         System.out.println("Nama Penyewa : "+nama);
         System.out.println("Umur         : "+umur);
         System.out.println("Alamat       : "+alamat);
+        mobil.tampilMobil();
+        System.out.println("==============================");
     }
 }
