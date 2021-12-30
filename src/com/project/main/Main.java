@@ -155,11 +155,11 @@ public class Main {
         Scanner inputChar = new Scanner(System.in);
 
         clearScreen();
-        System.out.println("||<=====================================||");
-        System.out.println("1. Cek Mobil    ||    2. Tambah Mobil     ");
-        System.out.println("3. Hapus Mobil  ||    4. Cek penyewa     ");
-        System.out.println("3. Logout       ||         ");
-        System.out.println("||<=====================================||");
+        System.out.println("||<=====================================================||");
+        System.out.println("1. Cek Mobil     ||    2. Tambah Mobil     ");
+        System.out.println("3. Hapus Mobil   ||    4. Daftar Penyewa   ");
+        System.out.println("5. Hapus Penyewa ||    6. Logotu           ");
+        System.out.println("||<=====================================================||");
 
         System.out.print("\nSilahkan lakukan = ");
         int milih = inputStr.nextInt();
@@ -272,8 +272,64 @@ public class Main {
 
                 break;
             case 4:
+                ulangi = true;
+                System.out.println("|| Daftar Penyewa ||");
+
+                while (ulangi){
+                    pegawai.bacaPenyewa();
+
+                    System.out.print("Masukkan nama penyewa: ");
+                    String nama = inputStr.next();
+
+                    Penyewa p = pegawai.getPenyewa(nama);
+                    if (p != null){
+                        p.tampilData();
+
+                        System.out.println("\nIngin mengecek lagi?(y/n): ");
+                        char ya = inputChar.next().charAt(0);
+
+                        if (ya == 'y' || ya == 'Y'){
+                            ulangi = true;
+                        } else {
+                            ulangi = false;
+                            afterLoginAdmin();
+                        }
+
+                    } else {
+                        System.out.println("Tidak ada penyewa dengan nama "+nama);
+                        ulangi = true;
+                    }
+                }
                 break;
             case 5:
+                ulangi = true;
+                System.out.println("|| Hapus Penyewa ||");
+                while (ulangi){
+                    pegawai.bacaPenyewa();
+
+                    System.out.print("Masukkan nama penyewa: ");
+                    String nama = inputStr.next();
+
+                    Penyewa p = pegawai.hapusPenyewa(nama);
+                    if (p != null){
+                        System.out.println("Berhasil menghapus!");
+
+                        System.out.println("\nHapus lagi?(y/n): ");
+                        char ya = inputChar.next().charAt(0);
+
+                        if (ya == 'y' || ya == 'Y'){
+                            ulangi = true;
+                        } else {
+                            ulangi = false;
+                            afterLoginAdmin();
+                        }
+                    } else {
+                        System.out.println("Gagal menghapus!");
+                        ulangi = true; 
+                    }
+                }
+                break;
+            case 6:
                 home();
                 break;
         }

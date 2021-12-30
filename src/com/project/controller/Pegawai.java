@@ -2,12 +2,12 @@ package com.project.controller;
 
 import com.project.model.Penyewa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pegawai {
     private String nama;
-    private List<Penyewa> lisPenyewa;
-    private int jml;
+    private List<Penyewa> lisPenyewa = new ArrayList<>();
 
     public Pegawai(String nama) {
         this.nama = nama;
@@ -18,7 +18,7 @@ public class Pegawai {
         System.out.println("");
         try {
             for (int j = 0; j < lisPenyewa.size(); j++) {
-                lisPenyewa.get(j).tampilData();
+                System.out.println((j+1)+". "+lisPenyewa.get(j).getNama());
             }
         } catch (NullPointerException e){
             System.out.println("Belum ada data penyewa");
@@ -26,19 +26,20 @@ public class Pegawai {
 
     }
 
-    public void hapusPenyewa(String penyewa){
+    public Penyewa hapusPenyewa(String penyewa){
         try {
             for (int j = 0; j < lisPenyewa.size(); j++) {
                 if (lisPenyewa.get(j).getNama().equals(penyewa)){
+                    Penyewa temp = lisPenyewa.get(j);
                     lisPenyewa.remove(j);
-                    System.out.println("Berhasil menghapus");
-                    break;
+                    return temp;
                 }
             }
         }catch (NullPointerException e){
             System.out.println("Belum ada data penyewa");
         }
 
+        return null;
     }
 
     public void tambahPenyewa(Penyewa x){
