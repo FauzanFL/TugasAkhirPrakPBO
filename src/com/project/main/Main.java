@@ -120,10 +120,19 @@ public class Main {
                         pegawai.tambahPenyewa(penyewa);
                         System.out.println("Berhasil menyewa!");
                         ulang = false;
-                        afterLoginAdmin();
+                        afterLoginPenyewa();
                     } else {
                         System.out.println("Nama mobil tidak ditemukan");
-                        ulang = true;
+
+                        System.out.print("Kembali?(y/n)");
+                        char kembali = inputChar.next().charAt(0);
+
+                        if (kembali == 'y' || kembali == 'Y'){
+                            ulang = false;
+                            afterLoginPenyewa();
+                        } else {
+                            ulang = true;
+                        }
                     }
                 }
 
@@ -148,7 +157,8 @@ public class Main {
         clearScreen();
         System.out.println("||<=====================================||");
         System.out.println("1. Cek Mobil    ||    2. Tambah Mobil     ");
-        System.out.println("3. Hapus Mobil  ||    4. Logout     ");
+        System.out.println("3. Hapus Mobil  ||    4. Cek penyewa     ");
+        System.out.println("3. Logout       ||         ");
         System.out.println("||<=====================================||");
 
         System.out.print("\nSilahkan lakukan = ");
@@ -158,8 +168,29 @@ public class Main {
             case 1:
                 System.out.println("|| Cek Mobil Ready ||");
                 try {
-                    for (int i = 0; i < listMobil.size(); i++) {
-                        System.out.println((i + 1) + ". " + listMobil.get(i).getJenisMobil());
+                    boolean back = false;
+                    if (listMobil.size() == 0){
+                        System.out.println("Belum ada mobil tersedia");
+                        afterLoginAdmin();
+                    } else {
+                        while (back == false){
+                            for (int i = 0; i < listMobil.size(); i++) {
+                                System.out.println("----------------------------------------");
+                                System.out.println((i + 1) + ". " + listMobil.get(i).getJenisMobil());
+                                listMobil.get(i).tampilMobil();
+                                System.out.println("----------------------------------------");
+                            }
+
+                            System.out.print("Kembali?(y/n)");
+                            char kembali = inputChar.next().charAt(0);
+
+                            if (kembali == 'y' || kembali == 'Y'){
+                                back = true;
+                                afterLoginAdmin();
+                            } else {
+                                back = false;
+                            }
+                        }
                     }
                 } catch (NullPointerException e) {
                     System.out.println("Belum ada data mobil");
@@ -198,8 +229,51 @@ public class Main {
                 }
                 break;
             case 3:
+                ulangi = true;
+
+                System.out.println("|| Hapus Mobil ||");
+
+                while (ulangi){ ;
+                    if (listMobil.size() == 0){
+                        System.out.println("Belum ada data mobil");
+                        afterLoginAdmin();
+                    } else {
+                        boolean ketemu = false;
+                        int i;
+                        System.out.print("Masukkan nama/jenis mobil: ");
+                        String nama = inputStr.next();
+                        for ( i = 0; i < listMobil.size(); i++) {
+                            if (listMobil.get(i).getJenisMobil().equals(nama)){
+                                ketemu = true;
+                                break;
+                            } else {
+                                ketemu = false;
+                            }
+                        }
+
+                        if (ketemu == true){
+                            listMobil.remove(i);
+                            System.out.println("Mobil berhasil dihapus");
+                        } else {
+                            System.out.println("Mobil tidak ditemukan");
+                        }
+
+                        System.out.println("\nHapus lagi?(y/n): ");
+                        char ya = inputChar.next().charAt(0);
+
+                        if (ya == 'y' || ya == 'Y'){
+                            ulangi = true;
+                        } else {
+                            ulangi = false;
+                            afterLoginAdmin();
+                        }
+                    }
+                }
+
                 break;
             case 4:
+                break;
+            case 5:
                 home();
                 break;
         }
