@@ -13,6 +13,16 @@ public class Pegawai {
         this.nama = nama;
     }
 
+    public Pegawai(){}
+
+    protected String getNama() {
+        return nama;
+    }
+
+    protected void setNama(String nama) {
+        this.nama = nama;
+    }
+
     public void bacaPenyewa(){
         System.out.println("Nama pegawai : "+nama);
         System.out.println("");

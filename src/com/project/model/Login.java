@@ -1,13 +1,22 @@
 package com.project.model;
 
 public class Login {
-    String username, password;
+    String nama, username, password;
     int role;
 
-    public Login(String username, String password, int role) {
+    public Login(String nama, String username, String password, int role) {
+        this.nama = nama;
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public String getUsername() {
