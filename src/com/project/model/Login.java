@@ -2,10 +2,12 @@ package com.project.model;
 
 public class Login {
     String username, password;
+    int role;
 
-    public Login(String username, String password) {
+    public Login(String username, String password, int role) {
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -22,5 +24,13 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }

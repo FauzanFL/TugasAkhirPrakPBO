@@ -1,19 +1,25 @@
 package com.project.main;
 
+import com.project.controller.Pegawai;
 import com.project.model.Login;
 import com.project.model.Mobil;
 import com.project.model.Penyewa;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static List<Mobil> listMobil;
+    private static List<Login> listLogin = new ArrayList<>();
+    private static List<Mobil> listMobil = new ArrayList<>();
     private static Login login;
+    private static Mobil mobil;
     private static Penyewa penyewa;
-    private static Login admin = new Login("admin","root");
+    private static Pegawai pegawai = new Pegawai("Aditya");
+    private static Login admin = new Login("admin","root",1);
 
     public static void main(String[] args) {
+        listLogin.add(admin);
         home();
     }
 
@@ -47,6 +53,7 @@ public class Main {
     private static void afterLoginPenyewa(){
         Scanner inputInt = new Scanner(System.in);
         Scanner inputStr = new Scanner(System.in);
+        Scanner inputChar = new Scanner(System.in);
 
         clearScreen();
         System.out.println("||<=====================================||");
@@ -61,11 +68,28 @@ public class Main {
         switch (milih) {
 
             case 1:
+                boolean back = false;
                 System.out.println("\n|| Cek Mobil Ready ||");
                 try {
-                    for (int i = 0; i < listMobil.size(); i++) {
-                        System.out.println((i + 1) + ". " + listMobil.get(i).getJenisMobil());
+                    while (back == false){
+                        for (int i = 0; i < listMobil.size(); i++) {
+                            System.out.println("----------------------------------------");
+                            System.out.println((i + 1) + ". " + listMobil.get(i).getJenisMobil());
+                            listMobil.get(i).tampilMobil();
+                            System.out.println("----------------------------------------");
+                        }
+
+                        System.out.print("Kembali?(y/n)");
+                        char kembali = inputChar.next().charAt(0);
+
+                        if (kembali == 'y' || kembali == 'Y'){
+                            back = true;
+                            afterLoginPenyewa();
+                        } else {
+                            back = false;
+                        }
                     }
+
                 } catch (NullPointerException e) {
                     System.out.println("Belum ada data mobil");
                     afterLoginPenyewa();
@@ -79,7 +103,7 @@ public class Main {
                 while (ulang){
                     System.out.println("\n|| Sewa Mobil  ||");
                     System.out.println("Pilih mobil : ");
-                    String mobil = inputStr.nextLine();
+                    String mobil = inputStr.next();
                     int index = 0;
                     boolean ketemu = false;
 
@@ -93,6 +117,7 @@ public class Main {
 
                     if (ketemu == true){
                         penyewa.setMobil(listMobil.get(index));
+                        pegawai.tambahPenyewa(penyewa);
                         System.out.println("Berhasil menyewa!");
                         ulang = false;
                         afterLoginAdmin();
@@ -142,15 +167,15 @@ public class Main {
                 }
                 break;
             case 2:
-                boolean ulang = true;
+                boolean ulangi = true;
 
                 System.out.println("|| Tambah Mobil ||");
 
-                while (ulang){
+                while (ulangi){
                     System.out.print("Masukkan nama/jenis mobil: ");
-                    String nama = inputStr.nextLine();
+                    String nama = inputStr.next();
                     System.out.print("Masukkan nomor plat: ");
-                    String plat = inputStr.nextLine();
+                    String plat = inputStr.next();
                     System.out.print("Masukkan kecepatan: ");
                     int kecepatan = inputInt.nextInt();
                     System.out.print("Masukkan jumlah maksimal penumpang: ");
@@ -158,16 +183,16 @@ public class Main {
                     System.out.print("Masukkan harga: ");
                     int harga = inputInt.nextInt();
 
-                    Mobil mobil = new Mobil(nama,plat,kecepatan,penumpang,harga);
+                    mobil = new Mobil(nama,plat,kecepatan,penumpang,harga);
                     listMobil.add(mobil);
 
                     System.out.println("\nTambah lagi?(y/n): ");
                     char ya = inputChar.next().charAt(0);
 
-                    if (ya == 'y' || ya == 'n'){
-                        ulang = true;
+                    if (ya == 'y' || ya == 'Y'){
+                        ulangi = true;
                     } else {
-                        ulang = false;
+                        ulangi = false;
                         afterLoginAdmin();
                     }
                 }
@@ -213,8 +238,9 @@ public class Main {
         System.out.print("Password = ");
         String pass = inputStr.nextLine();
 
-        login = new Login(user, pass);
+        login = new Login(user, pass,2);
         penyewa = new Penyewa(nama, umur, alamat);
+        listLogin.add(login);
     }
 
     private static void login(){
@@ -229,34 +255,40 @@ public class Main {
         System.out.print("Password = ");
         String passlog = input.next();
         try {
-            if (admin.getUsername().equals(userlog) && admin.getPassword().equals(passlog)) {
-                afterLoginAdmin();
-            } else if (login.getUsername().equals(userlog) && login.getPassword().equals(passlog)) {
-                afterLoginPenyewa();
-            } else {
-                System.out.println("Username dan password salah!");
+            for (int i = 0; i < listLogin.size(); i++) {
+                if (listLogin.get(i).getUsername().equals(userlog) && listLogin.get(i).getPassword().equals(passlog) && listLogin.get(i).getRole()==1) {
+                    afterLoginAdmin();
+                } else if (listLogin.get(i).getUsername().equals(userlog) && listLogin.get(i).getPassword().equals(passlog) && listLogin.get(i).getRole()==2) {
+                    afterLoginPenyewa();
+                } else {
+                    System.out.println("Username dan password salah!");
 
-                System.out.println();
-                System.out.println("\n||===== Login =====||");
-                System.out.print("Username = ");
-                userlog = input.next();
+                    System.out.println();
+                    System.out.println("\n||===== Login =====||");
+                    System.out.print("Username = ");
+                    userlog = input.next();
 
-                System.out.print("Password = ");
-                passlog = input.next();
-                try {
-                    if (login.getUsername().equals(userlog) && login.getPassword().equals(passlog)) {
-                        afterLoginPenyewa();
-                    } else if (admin.getUsername().equals(userlog) && admin.getPassword().equals(passlog)) {
-                        afterLoginAdmin();
-                    } else {
-                        System.out.println("Username dan password salah!");
+                    System.out.print("Password = ");
+                    passlog = input.next();
+                    try {
+                        for (int j = 0; j < listLogin.size(); j++) {
+                            if (listLogin.get(j).getUsername().equals(userlog) && listLogin.get(j).getPassword().equals(passlog) && listLogin.get(j).getRole()==1) {
+                                afterLoginAdmin();
+                            } else if (listLogin.get(j).getUsername().equals(userlog) && listLogin.get(j).getPassword().equals(passlog) && listLogin.get(j).getRole()==2) {
+                                afterLoginPenyewa();
+                            } else {
+                                System.out.println("Username dan password salah!");
 
+                            }
+                        }
+
+                    } catch (NullPointerException e) {
+                        System.out.println("Belum ada data login");
+                        home();
                     }
-                } catch (NullPointerException e) {
-                    System.out.println("Belum ada data login");
-                    home();
                 }
             }
+
         } catch (NullPointerException e) {
             System.out.println("Belum ada data login");
             home();

@@ -55,10 +55,11 @@ public class Mobil {
         this.noPlat = noPlat;
     }
 
-    void tampilMobil(){
+    public void tampilMobil(){
         System.out.println("Jenis Mobil   : "+jenisMobil);
         System.out.println("Kecepatan     : "+kecepatan);
         System.out.println("Max Penumpang : "+maxPenumpang);
         System.out.println("No Plat       : "+noPlat);
+        System.out.println("Harga         : "+harga);
     }
 }
