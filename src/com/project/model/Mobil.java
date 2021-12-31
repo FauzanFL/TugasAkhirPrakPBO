@@ -5,6 +5,23 @@ public class Mobil {
     private String noPlat;
     private int kecepatan;
     private int maxPenumpang;
+    private int harga;
+
+    public Mobil(String jenisMobil, String noPlat, int kecepatan, int maxPenumpang, int harga) {
+        this.jenisMobil = jenisMobil;
+        this.noPlat = noPlat;
+        this.kecepatan = kecepatan;
+        this.maxPenumpang = maxPenumpang;
+        this.harga = harga;
+    }
+
+    public int getHarga() {
+        return harga;
+    }
+
+    public void setHarga(int harga) {
+        this.harga = harga;
+    }
 
     public int getMaxPenumpang() {
         return maxPenumpang;
@@ -38,10 +55,11 @@ public class Mobil {
         this.noPlat = noPlat;
     }
 
-    void tampilMobil(){
+    public void tampilMobil(){
         System.out.println("Jenis Mobil   : "+jenisMobil);
         System.out.println("Kecepatan     : "+kecepatan);
         System.out.println("Max Penumpang : "+maxPenumpang);
         System.out.println("No Plat       : "+noPlat);
+        System.out.println("Harga         : "+harga);
     }
 }
