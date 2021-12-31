@@ -1,7 +1,5 @@
 package com.project.controller;
 
-import com.project.model.Penyewa;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,7 @@ public class Pemilik extends Pegawai {
     private static List<Pegawai> listPegawai = new ArrayList<>();
 
     public Pemilik(String nama) {
-        super();
+        super(nama);
         this.nama = nama;
     }
 
@@ -48,9 +46,18 @@ public class Pemilik extends Pegawai {
         return null;
     }
 
-    public void tampilPegawai(){
-        for (int i = 0; i < listPegawai.size(); i++) {
-            System.out.println((i+2)+". "+listPegawai.get(i).getNama());
+    public void tampilPegawai(boolean includePemilik){
+
+        if (includePemilik == true){
+            System.out.println("1. "+nama+" (owner)");
+            for (int i = 0; i < listPegawai.size(); i++) {
+                System.out.println((i+2)+". "+listPegawai.get(i).getNama());
+            }
+        } else {
+            for (int i = 0; i < listPegawai.size(); i++) {
+                System.out.println((i+1)+". "+listPegawai.get(i).getNama());
+            }
         }
+
     }
 }
