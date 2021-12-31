@@ -13,8 +13,6 @@ public class Pegawai {
         this.nama = nama;
     }
 
-    public Pegawai(){}
-
     protected String getNama() {
         return nama;
     }
