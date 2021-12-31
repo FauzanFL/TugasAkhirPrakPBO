@@ -29,10 +29,14 @@ public class Main {
         Scanner input = new Scanner(System.in);
         boolean ulangi = true;
 
+        System.out.println("----------------------------------------");
+        System.out.println("||<===== RENTAL MOBIL ADRIAZ =====>||");
+        System.out.println("----------------------------------------");
+
         while (ulangi) {
             clearScreen();
             menuAwal();
-            System.out.print("\nSilahkan lakukan = ");
+            System.out.print("\nPilih Menu = ");
             int milih = input.nextInt();
 
             switch (milih) {
@@ -56,15 +60,14 @@ public class Main {
                 case 4:
                     System.exit(0);
                     break;
+                default:
+                    System.out.println("Tidak boleh lebih diluar rentang dari 1 - 4");
+                    break;
             }
         }
     }
 
     private static void menuAwal(){
-        System.out.println("----------------------------------------");
-        System.out.println("||<===== RENTAL MOBIL ADRIAZ =====>||");
-        System.out.println("----------------------------------------");
-
         System.out.println();
         System.out.println("||=====================================||");
         System.out.println("1. Pendaftaran\n2. Login\n3. Ingin menjadi pegawai?\n4. Exit  ");
@@ -241,12 +244,12 @@ public class Main {
 
         clearScreen();
         System.out.println("||<=====================================||");
-        System.out.println("1. Cek Mobil    ||    2. Sewa Mobil     ");
-        System.out.println("3. Pembayaran   ||    4. Nota Pembayaran");
-        System.out.println("5. Logout       ||    ");
+        System.out.println("1. Cek Mobil    ||    4. Nota Pembayaran     ");
+        System.out.println("2. Sewa Mobil   ||    5. Logout");
+        System.out.println("3. Pembayaran   ||    ");
         System.out.println("||<=====================================||");
 
-        System.out.print("\nSilahkan lakukan = ");
+        System.out.print("\nPilih Menu = ");
         int milih = inputInt.nextInt();
 
         switch (milih) {
@@ -361,12 +364,12 @@ public class Main {
 
         clearScreen();
         System.out.println("||<=====================================================||");
-        System.out.println("1. Cek Mobil     ||    2. Tambah Mobil     ");
-        System.out.println("3. Hapus Mobil   ||    4. Daftar Penyewa   ");
-        System.out.println("5. Hapus Penyewa ||    6. Logout           ");
+        System.out.println("1. Cek Mobil        ||    4. Daftar Penyewa    ");
+        System.out.println("2. Tambah Mobil     ||    5. Hapus Penyewa   ");
+        System.out.println("3. Hapus Mobil      ||    6. Logout           ");
         System.out.println("||<=====================================================||");
 
-        System.out.print("\nSilahkan lakukan = ");
+        System.out.print("\nPilih Menu = ");
         int milih = input.nextInt();
 
         switch (milih){
