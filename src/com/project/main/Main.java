@@ -13,10 +13,10 @@ import java.util.Scanner;
 public class Main {
     private static List<Login> listLogin = new ArrayList<>();
     private static List<Mobil> listMobil = new ArrayList<>();
+    private static List<Penyewa> listPenyewa = new ArrayList<>();
     private static Login login;
     private static Mobil mobil;
-    private static Penyewa penyewa;
-    private static Pemilik pemilik = new Pemilik("Aditya");
+    private static final Pemilik pemilik = new Pemilik("Aditya");
 
     public static void main(String[] args) {
         Login admin = new Login("Aditya","admin","root",1);
@@ -93,7 +93,8 @@ public class Main {
         String pass = inputStr.nextLine();
 
         login = new Login(nama,user, pass,3);
-        penyewa = new Penyewa(nama, umur, alamat);
+        Penyewa penyewa = new Penyewa(nama, umur, alamat);
+        listPenyewa.add(penyewa);
         listLogin.add(login);
 
         System.out.println("\nBerhasil mendaftar!");
@@ -101,6 +102,7 @@ public class Main {
 
     private static void login(){
         Scanner input = new Scanner(System.in);
+        Penyewa penyewa;
         String username = "";
         String password = "";
         String nama = "";
@@ -132,7 +134,13 @@ public class Main {
                 } else if (username.equals(userlog) && password.equals(passlog) && role==2) {
                     afterLoginPegawai(nama);
                 } else if (username.equals(userlog) && password.equals(passlog) && role==3) {
-                    afterLoginPenyewa();
+                    for (int i = 0; i < listPenyewa.size(); i++) {
+                        if (listPenyewa.get(i).getNama().equals(nama)){
+                            penyewa = listPenyewa.get(i);
+                            afterLoginPenyewa(penyewa);
+                            break;
+                        }
+                    }
                 } else {
                     System.out.println("Username dan password salah!");
                     clearScreen();
@@ -159,7 +167,13 @@ public class Main {
                         } else if (username.equals(userlog) && password.equals(passlog) && role==2) {
                             afterLoginPegawai(nama);
                         } else if (username.equals(userlog) && password.equals(passlog) && role==3) {
-                            afterLoginPenyewa();
+                            for (int i = 0; i < listPenyewa.size(); i++) {
+                                if (listPenyewa.get(i).getNama().equals(nama)){
+                                    penyewa = listPenyewa.get(i);
+                                    afterLoginPenyewa(penyewa);
+                                    break;
+                                }
+                            }
                         } else {
                             System.out.println("Username dan password salah!");
                             login();
@@ -208,13 +222,19 @@ public class Main {
     // Fitur Pemilik
 
     private static void afterLoginPemilik(){
-
+        clearScreen();
+        System.out.println("||<=====================================================||");
+        System.out.println("1. Cek Mobil     ||    2. Tambah Mobil     ");
+        System.out.println("3. Hapus Mobil   ||    4. Daftar Penyewa   ");
+        System.out.println("5. Hapus Penyewa ||    6. Daftar Pegawai   ");
+        System.out.println("7. Hapus Pegawai ||    8. Logout   ");
+        System.out.println("||<=====================================================||");
     }
 
 
     // Fitur Penyewa
 
-    private static void afterLoginPenyewa(){
+    private static void afterLoginPenyewa(Penyewa penyewa){
         Scanner inputInt = new Scanner(System.in);
         Scanner inputStr = new Scanner(System.in);
         Scanner inputChar = new Scanner(System.in);
@@ -252,7 +272,7 @@ public class Main {
 
                             if (kembali == 'y' || kembali == 'Y'){
                                 back = true;
-                                afterLoginPenyewa();
+                                afterLoginPenyewa(penyewa);
                             } else {
                                 back = false;
                             }
@@ -260,10 +280,9 @@ public class Main {
 
                     } catch (NullPointerException e) {
                         System.out.println("Belum ada data mobil");
-                        afterLoginPenyewa();
+                        afterLoginPenyewa(penyewa);
                     }
                 }
-
 
                 break;
 
@@ -273,31 +292,39 @@ public class Main {
                 while (ulang){
                     System.out.println("\n|| Sewa Mobil  ||");
 
-
+                    System.out.println("1. "+pemilik.getNama()+ " (owner)");
                     pemilik.tampilPegawai();
 
                     System.out.print("Pilih pegawai (masukkan nama) : ");
                     String pegawai = inputStr.next();
 
+                    for (int i = 0; i < listMobil.size(); i++) {
+                        System.out.println((i+1)+". "+listMobil.get(i).getJenisMobil());
+                    }
+
                     System.out.print("Pilih mobil (masukkan nama) : ");
                     String mobil = inputStr.next();
-                    int index = 0;
+                    int i;
                     boolean ketemu = false;
 
-                    for (Mobil value : listMobil) {
-                        index++;
-                        if (value.getJenisMobil().equals(mobil)) {
+                    for ( i = 0; i < listMobil.size(); i++) {
+                        if (listMobil.get(i).getJenisMobil().equals(mobil)){
                             ketemu = true;
                             break;
                         }
                     }
 
                     if (ketemu == true){
-                        penyewa.setMobil(listMobil.get(index));
-                        pemilik.getPegawai(pegawai).tambahPenyewa(penyewa);
+                        if (pegawai.equals("Aditya")){
+                            penyewa.setMobil(listMobil.get(i));
+                            pemilik.tambahPenyewa(penyewa);
+                        } else {
+                            penyewa.setMobil(listMobil.get(i));
+                            pemilik.getPegawai(pegawai).tambahPenyewa(penyewa);
+                        }
                         System.out.println("Berhasil menyewa!");
                         ulang = false;
-                        afterLoginPenyewa();
+                        afterLoginPenyewa(penyewa);
                     } else {
                         System.out.println("Nama mobil tidak ditemukan");
 
@@ -306,7 +333,7 @@ public class Main {
 
                         if (kembali == 'y' || kembali == 'Y'){
                             ulang = false;
-                            afterLoginPenyewa();
+                            afterLoginPenyewa(penyewa);
                         } else {
                             ulang = true;
                         }
@@ -422,7 +449,7 @@ public class Main {
             mobil = new Mobil(nama,plat,kecepatan,penumpang,harga);
             listMobil.add(mobil);
 
-            System.out.println("\nTambah lagi?(y/n): ");
+            System.out.print("\nTambah lagi?(y/n): ");
             char ya = inputStr.next().charAt(0);
 
             if (ya == 'y' || ya == 'Y'){
@@ -465,7 +492,7 @@ public class Main {
                     System.out.println("Mobil tidak ditemukan");
                 }
 
-                System.out.println("\nHapus lagi?(y/n): ");
+                System.out.print("\nHapus lagi?(y/n): ");
                 char ya = inputStr.next().charAt(0);
 
                 if (ya == 'y' || ya == 'Y'){
@@ -494,7 +521,7 @@ public class Main {
             if (p != null){
                 p.tampilData();
 
-                System.out.println("\nIngin mengecek lagi?(y/n): ");
+                System.out.print("\nIngin mengecek lagi?(y/n): ");
                 char ya = inputStr.next().charAt(0);
 
                 if (ya == 'y' || ya == 'Y'){
@@ -527,7 +554,7 @@ public class Main {
             if (p != null){
                 System.out.println("Berhasil menghapus!");
 
-                System.out.println("\nHapus lagi?(y/n): ");
+                System.out.print("\nHapus lagi?(y/n): ");
                 char ya = inputStr.next().charAt(0);
 
                 if (ya == 'y' || ya == 'Y'){

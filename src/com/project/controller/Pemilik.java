@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import com.project.model.Penyewa;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class Pemilik extends Pegawai {
         }
     }
 
-    public Pegawai hapusData(String nama){
+    public Pegawai hapusPegawai(String nama){
         for (int i = 0; i < listPegawai.size(); i++) {
             if (listPegawai.get(i).getNama().equals(nama)){
                 Pegawai p = listPegawai.get(i);
@@ -47,10 +49,8 @@ public class Pemilik extends Pegawai {
     }
 
     public void tampilPegawai(){
-        System.out.println("1. "+nama);
         for (int i = 0; i < listPegawai.size(); i++) {
             System.out.println((i+2)+". "+listPegawai.get(i).getNama());
         }
     }
-
 }
