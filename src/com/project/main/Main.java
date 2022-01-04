@@ -560,13 +560,12 @@ public class Main {
     private static void afterLoginPenyewa(Penyewa penyewa){
         Scanner inputInt = new Scanner(System.in);
         Scanner inputStr = new Scanner(System.in);
-        Scanner inputChar = new Scanner(System.in);
 
         clearScreen();
         System.out.println("||<=====================================||");
-        System.out.println("1. Cek Mobil    ||    4. Nota Pembayaran     ");
-        System.out.println("2. Sewa Mobil   ||    5. Logout");
-        System.out.println("3. Pembayaran   ||    ");
+        System.out.println("1. Cek Mobil          || 4. Nota Pembayaran     ");
+        System.out.println("2. Sewa Mobil         || 5. Logout");
+        System.out.println("3. Pengembalian Mobil ||    ");
         System.out.println("||<=====================================||");
 
         System.out.print("\nPilih Menu = ");
@@ -591,7 +590,7 @@ public class Main {
                             }
 
                             System.out.print("Kembali?(y/n)");
-                            char kembali = inputChar.next().charAt(0);
+                            char kembali = inputStr.next().charAt(0);
 
                             if (kembali == 'y' || kembali == 'Y'){
                                 back = true;
@@ -644,6 +643,7 @@ public class Main {
                             penyewa.setMobil(listMobil.get(i));
                             pemilik.getPegawai(pegawai).tambahPenyewa(penyewa);
                         }
+                        listMobil.set(i,null);
                         System.out.println("Berhasil menyewa!");
                         ulang = false;
                         afterLoginPenyewa(penyewa);
@@ -651,7 +651,7 @@ public class Main {
                         System.out.println("Nama mobil tidak ditemukan");
 
                         System.out.print("Kembali?(y/n)");
-                        char kembali = inputChar.next().charAt(0);
+                        char kembali = inputStr.next().charAt(0);
 
                         if (kembali == 'y' || kembali == 'Y'){
                             ulang = false;
@@ -661,16 +661,58 @@ public class Main {
                         }
                     }
                 }
-
                 break;
             case 3:
+                ulang = true;
+
+                while (ulang){
+                    System.out.println("\n|| Pengembalian Mobil ||");
+
+                    Mobil temp = penyewa.getMobil();
+
+                    if (temp == null){
+                        System.out.println("Belum ada mobil yang disewa");
+                    } else {
+                        System.out.println("\n Mobil yang disewa \n");
+                        System.out.println("-------------------------");
+                        temp.tampilMobil();
+                        System.out.println("-------------------------");
+
+                        System.out.println("Kembalikan?(y/n): ");
+                        char y = inputStr.next().charAt(0);
+                        if (y == 'y' || y == 'Y'){
+                            System.out.println("Mobil dikembalikan");
+                            ulang = false;
+                            afterLoginPenyewa(penyewa);
+                        } else {
+                            ulang = true;
+                        }
+                    }
+                }
+
                 break;
             case 4:
+                ulang = true;
+
+                while (ulang){
+                    System.out.println("\n|| Nota Pembayaran ||\n");
+                    penyewa.tampilNota();
+
+                    System.out.println("Kembali?(y/n): ");
+                    char y = inputStr.next().charAt(0);
+                    if (y == 'y' || y == 'Y'){
+                        ulang = false;
+                        afterLoginPenyewa(penyewa);
+                    } else {
+                        ulang = true;
+                    }
+                }
+
                 break;
             case 5:
                 home();
-                break;
 
+                break;
         }
 
     }
