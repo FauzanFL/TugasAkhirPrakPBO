@@ -50,7 +50,7 @@ public class Pemilik extends Pegawai {
 
     public void kembalikanMobil(String nama){
         for (int i = 0; i < listPegawai.size(); i++) {
-            listPegawai.get(i).getPenyewa(nama).kembalikanMobil();
+            listPegawai.get(i).hapusPenyewa(nama);
         }
     }
 

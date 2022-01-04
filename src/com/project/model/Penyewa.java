@@ -50,9 +50,9 @@ public class Penyewa {
     public void tampilNota(){
         if (mobil != null){
             System.out.println("==============================");
-            System.out.println("Nama Penyewa : "+nama);
-            System.out.println("Umur         : "+umur);
-            System.out.println("Alamat       : "+alamat);
+            System.out.println("Nama Penyewa  : "+nama);
+            System.out.println("Umur          : "+umur);
+            System.out.println("Alamat        : "+alamat);
             mobil.tampilMobil();
             System.out.println("==============================");
         } else {
@@ -62,9 +62,9 @@ public class Penyewa {
 
     public void tampilData(){
         System.out.println("==============================");
-        System.out.println("Nama Penyewa : "+nama);
-        System.out.println("Umur         : "+umur);
-        System.out.println("Alamat       : "+alamat);
+        System.out.println("Nama Penyewa  : "+nama);
+        System.out.println("Umur          : "+umur);
+        System.out.println("Alamat        : "+alamat);
         mobil.tampilMobil();
         System.out.println("==============================");
     }
