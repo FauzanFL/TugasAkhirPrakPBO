@@ -245,10 +245,10 @@ public class Main {
 
         clearScreen();
         System.out.println("||<=====================================================||");
-        System.out.println("1. Cek Mobil     ||    2. Tambah Mobil     ");
-        System.out.println("3. Hapus Mobil   ||    4. Daftar Penyewa   ");
-        System.out.println("5. Hapus Penyewa ||    6. Daftar Pegawai   ");
-        System.out.println("7. Hapus Pegawai ||    8. Logout   ");
+        System.out.println("1. Cek Mobil        ||  5. Hapus Penyewa");
+        System.out.println("2. Tambah Mobil     ||  6. Daftar Pegawai");
+        System.out.println("3. Hapus Mobil      ||  7. Hapus Pegawai");
+        System.out.println("4. Daftar Penyewa   ||  8. Logout");
         System.out.println("||<=====================================================||");
 
         System.out.print("\nPilih menu: ");
