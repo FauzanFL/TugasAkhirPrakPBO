@@ -43,14 +43,8 @@ public class Penyewa {
         this.alamat = alamat;
     }
 
-    public Mobil kembalikanMobil(){
-        if (mobil != null){
-            Mobil temp = mobil;
-            mobil = null;
-            return temp;
-        } else {
-            return null;
-        }
+    public void kembalikanMobil(){
+        mobil = null;
     }
 
     public void tampilNota(){

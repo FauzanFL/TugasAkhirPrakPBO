@@ -57,9 +57,9 @@ public class Mobil {
 
     public void tampilMobil(){
         System.out.println("Jenis Mobil   : "+jenisMobil);
-        System.out.println("Kecepatan     : "+kecepatan);
-        System.out.println("Max Penumpang : "+maxPenumpang);
+        System.out.println("Kecepatan     : "+kecepatan+" Km/jam");
+        System.out.println("Max Penumpang : "+maxPenumpang+ " orang");
         System.out.println("No Plat       : "+noPlat);
-        System.out.println("Harga         : "+harga);
+        System.out.println("Harga         : Rp. "+harga);
     }
 }

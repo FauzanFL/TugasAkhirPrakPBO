@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import com.project.model.Penyewa;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,22 @@ public class Pemilik extends Pegawai {
         for (int i = 0; i < listPegawai.size(); i++) {
             if (listPegawai.get(i).getNama().equals(nama)){
                 return listPegawai.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void kembalikanMobil(String nama){
+        for (int i = 0; i < listPegawai.size(); i++) {
+            listPegawai.get(i).getPenyewa(nama).kembalikanMobil();
+        }
+    }
+
+    public Penyewa getPenyewaFromPegawai(String nama) {
+        for (int i = 0; i < listPegawai.size(); i++) {
+            Penyewa penyewa = listPegawai.get(i).getPenyewa(nama);
+            if (penyewa != null){
+                return penyewa;
             }
         }
         return null;
