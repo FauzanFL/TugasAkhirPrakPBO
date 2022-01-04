@@ -43,6 +43,29 @@ public class Penyewa {
         this.alamat = alamat;
     }
 
+    public Mobil kembalikanMobil(){
+        if (mobil != null){
+            Mobil temp = mobil;
+            mobil = null;
+            return temp;
+        } else {
+            return null;
+        }
+    }
+
+    public void tampilNota(){
+        if (mobil != null){
+            System.out.println("==============================");
+            System.out.println("Nama Penyewa : "+nama);
+            System.out.println("Umur         : "+umur);
+            System.out.println("Alamat       : "+alamat);
+            mobil.tampilMobil();
+            System.out.println("==============================");
+        } else {
+            System.out.println("Tidak ada mobil yang disewa");
+        }
+    }
+
     public void tampilData(){
         System.out.println("==============================");
         System.out.println("Nama Penyewa : "+nama);

@@ -564,9 +564,9 @@ public class Main {
 
         clearScreen();
         System.out.println("||<=====================================||");
-        System.out.println("1. Cek Mobil    ||    4. Nota Pembayaran     ");
-        System.out.println("2. Sewa Mobil   ||    5. Logout");
-        System.out.println("3. Pembayaran   ||    ");
+        System.out.println("1. Cek Mobil          || 4. Nota Pembayaran     ");
+        System.out.println("2. Sewa Mobil         || 5. Logout");
+        System.out.println("3. Pengembalian Mobil ||    ");
         System.out.println("||<=====================================||");
 
         System.out.print("\nPilih Menu = ");
@@ -644,6 +644,7 @@ public class Main {
                             penyewa.setMobil(listMobil.get(i));
                             pemilik.getPegawai(pegawai).tambahPenyewa(penyewa);
                         }
+                        listMobil.set(i,null);
                         System.out.println("Berhasil menyewa!");
                         ulang = false;
                         afterLoginPenyewa(penyewa);
@@ -661,11 +662,26 @@ public class Main {
                         }
                     }
                 }
-
                 break;
             case 3:
+                ulang = true;
+
+                while (ulang){
+                    System.out.println("\n|| Pengembalian Mobil ||");
+
+
+                }
+
                 break;
             case 4:
+                ulang = true;
+
+                while (ulang){
+                    System.out.println("\n|| Nota Pembayaran ||");
+
+
+                }
+
                 break;
             case 5:
                 home();
