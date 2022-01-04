@@ -106,6 +106,7 @@ public class Main {
 
     private static void login(){
         Scanner input = new Scanner(System.in);
+        Scanner inputStr = new Scanner(System.in);
         Penyewa penyewa;
         String username = "";
         String password = "";
@@ -147,6 +148,13 @@ public class Main {
                     }
                 } else {
                     System.out.println("Username dan password salah!");
+                    System.out.print("\nKembali?(y/n)");
+                    char kembali = inputStr.next().charAt(0);
+
+                    if (kembali == 'y' || kembali == 'Y'){
+                        home();
+                    }
+
                     clearScreen();
 
                     System.out.println();
@@ -180,7 +188,14 @@ public class Main {
                             }
                         } else {
                             System.out.println("Username dan password salah!");
-                            login();
+                            System.out.print("\nKembali?(y/n)");
+                            kembali = inputStr.next().charAt(0);
+
+                            if (kembali == 'y' || kembali == 'Y'){
+                                home();
+                            } else {
+                                login();
+                            }
                         }
                     } catch (NullPointerException e) {
                         System.out.println("Belum ada data login");
@@ -614,17 +629,19 @@ public class Main {
                 while (ulang){
                     System.out.println("\n|| Sewa Mobil  ||");
 
-                    pemilik.tampilPegawai(true);
-
-                    System.out.print("Pilih pegawai (masukkan nama) : ");
-                    String pegawai = inputStr.next();
-
                     for (int i = 0; i < listMobil.size(); i++) {
                         System.out.println((i+1)+". "+listMobil.get(i).getJenisMobil());
                     }
 
                     System.out.print("Pilih mobil (masukkan nama) : ");
                     String mobil = inputStr.next();
+
+                    pemilik.tampilPegawai(true);
+
+                    System.out.print("Pilih pegawai (masukkan nama) : ");
+                    String pegawai = inputStr.next();
+
+
                     int i;
                     boolean ketemu = false;
 
@@ -636,17 +653,24 @@ public class Main {
                     }
 
                     if (ketemu == true){
-                        if (pegawai.equals("Aditya")){
-                            penyewa.setMobil(listMobil.get(i));
-                            pemilik.tambahPenyewa(penyewa);
+                        System.out.print("Yakin untuk menyewa?(y/n): ");
+                        char y = inputStr.next().charAt(0);
+                        if (y == 'y' || y == 'Y'){
+                            if (pegawai.equals("Aditya")){
+                                penyewa.setMobil(listMobil.get(i));
+                                pemilik.tambahPenyewa(penyewa);
+                            } else {
+                                penyewa.setMobil(listMobil.get(i));
+                                pemilik.getPegawai(pegawai).tambahPenyewa(penyewa);
+                            }
+                            listMobil.set(i,null);
+                            System.out.println("Berhasil menyewa!");
+                            ulang = false;
+                            afterLoginPenyewa(penyewa);
                         } else {
-                            penyewa.setMobil(listMobil.get(i));
-                            pemilik.getPegawai(pegawai).tambahPenyewa(penyewa);
+                            afterLoginPenyewa(penyewa);
                         }
-                        listMobil.set(i,null);
-                        System.out.println("Berhasil menyewa!");
-                        ulang = false;
-                        afterLoginPenyewa(penyewa);
+
                     } else {
                         System.out.println("Nama mobil tidak ditemukan");
 
@@ -672,15 +696,26 @@ public class Main {
 
                     if (temp == null){
                         System.out.println("Belum ada mobil yang disewa");
+                        System.out.print("Kembali?(y/n): ");
+                        char y = inputStr.next().charAt(0);
+                        if (y == 'y' || y == 'Y'){
+                            ulang = false;
+                            afterLoginPenyewa(penyewa);
+                        } else {
+                            ulang = true;
+                        }
                     } else {
                         System.out.println("\n Mobil yang disewa \n");
                         System.out.println("-------------------------");
                         temp.tampilMobil();
                         System.out.println("-------------------------");
 
-                        System.out.println("Kembalikan?(y/n): ");
+                        System.out.print("Kembalikan?(y/n): ");
                         char y = inputStr.next().charAt(0);
                         if (y == 'y' || y == 'Y'){
+                            penyewa.kembalikanMobil();
+                            pemilik.getPenyewa(penyewa.getNama()).kembalikanMobil();
+                            pemilik.kembalikanMobil(penyewa.getNama());
                             System.out.println("Mobil dikembalikan");
                             ulang = false;
                             afterLoginPenyewa(penyewa);
@@ -696,15 +731,32 @@ public class Main {
 
                 while (ulang){
                     System.out.println("\n|| Nota Pembayaran ||\n");
-                    penyewa.tampilNota();
 
-                    System.out.println("Kembali?(y/n): ");
-                    char y = inputStr.next().charAt(0);
-                    if (y == 'y' || y == 'Y'){
-                        ulang = false;
-                        afterLoginPenyewa(penyewa);
-                    } else {
-                        ulang = true;
+                    Penyewa tmp = pemilik.getPenyewa(penyewa.getNama());
+                    if (tmp == null){
+                        tmp = pemilik.getPenyewaFromPegawai(penyewa.getNama());
+                        if (tmp != null){
+                            tmp.tampilNota();
+
+                            System.out.print("Kembali?(y/n): ");
+                            char y = inputStr.next().charAt(0);
+                            if (y == 'y' || y == 'Y'){
+                                ulang = false;
+                                afterLoginPenyewa(penyewa);
+                            } else {
+                                ulang = true;
+                            }
+                        } else {
+                            System.out.println("Tidak ada nota pembayaran");
+                            System.out.print("Kembali?(y/n): ");
+                            char y = inputStr.next().charAt(0);
+                            if (y == 'y' || y == 'Y'){
+                                ulang = false;
+                                afterLoginPenyewa(penyewa);
+                            } else {
+                                ulang = true;
+                            }
+                        }
                     }
                 }
 
