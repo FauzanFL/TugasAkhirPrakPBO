@@ -264,6 +264,13 @@ Suatu class yang mempunyai class turunan di namakan parents class atau base clas
 **11. Penggunaan Try Catch** <br>
 ![image](https://user-images.githubusercontent.com/92510019/148229060-0128d306-ff16-4800-8d33-f6c74c5ba1a9.png)
 
+**12. Penggunaan Information Hidding** <br>
+![image](https://user-images.githubusercontent.com/92510019/148232915-a13ad26e-4b9b-45e7-ba49-da74bd302035.png)
+
+**13. Penggunaan Getter dan Setter** <br>
+![image](https://user-images.githubusercontent.com/92510019/148233013-055c7dce-0ab0-4358-bd92-7518bc1e0a29.png)
+
+
 <hr>
 
 ### KESIMPULAN
