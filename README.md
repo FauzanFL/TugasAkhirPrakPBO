@@ -255,7 +255,7 @@ Suatu class yang mempunyai class turunan di namakan parents class atau base clas
 ![image](https://user-images.githubusercontent.com/92510019/148225187-949e5e5a-61e5-4691-afe5-70a89083ba9f.png)
 
 **9. Penggunaan Overload Constructor** <br>
-![image](https://user-images.githubusercontent.com/92510019/148228333-dfc62e06-cf61-49c6-bac6-639dc2f7d8ac.png)
+![image](https://user-images.githubusercontent.com/92510019/148232652-7db597ac-492e-4119-af32-19cca9e47d8b.png)
 
 **10. Penggunaan Overload Method** <br>
 ![image](https://user-images.githubusercontent.com/92510019/148228888-b8cbff1d-449c-4e44-9308-2b2e0ad6d739.png)
