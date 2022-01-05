@@ -1,5 +1,14 @@
 # LAPORAN TUGAS BESAR PRAKTIKUM PEMROGRAMAN BERORIENTASI OBJEK
-  
+
+<hr>
+
+### KELOMPOK <br>
+
+Aditya Rizkiawan Nugraha 20104006 <br>
+Daffa Rayhan Riadi       20104023 <br>
+Fauzan Fashihul Lisan    20104029 <br>
+Hastin Ajeng Shalma      20104030 <br>
+
 <hr>
 
 ### PENDAHULUAN
@@ -282,4 +291,3 @@ Pada class pemilik yang merupakan extends dari class pegawai terdapat constructo
 <hr>
 
 Dengan menggunakan Intellij IDEA, dapat dihasilkan suatu program penyewaan mobil. Dengan adanya program tersebut dapat mempermudah customer dalam memilih dan menyewa mobil dengan model dan harga yang di inginkan. Pada program sederhana mengenai Rental mobil ini melibatkan class Pegawai & Pemilik yang terdapat pada Package Controller, Class Main yang terdapat pada Package Main dan Class login, class Mobil dan Class Penyewa yang terdapat pada Package Model. <br>
-
