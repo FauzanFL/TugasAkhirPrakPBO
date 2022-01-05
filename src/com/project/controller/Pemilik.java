@@ -10,7 +10,7 @@ public class Pemilik extends Pegawai {
     private static List<Pegawai> listPegawai = new ArrayList<>();
 
     public Pemilik(String nama) {
-        super(nama);
+        super();
         this.nama = nama;
     }
 
