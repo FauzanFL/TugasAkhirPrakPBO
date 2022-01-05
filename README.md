@@ -277,4 +277,5 @@ Suatu class yang mempunyai class turunan di namakan parents class atau base clas
 
 <hr>
 
-Dengan menggunakan Intellij IDEA, dapat dihasilkan suatu program penyewaan mobil. Dengan adanya program tersebut dapat mempermudah customer dalam memilih dan menyewa mobil dengan model dan harga yang di inginkan.
+Dengan menggunakan Intellij IDEA, dapat dihasilkan suatu program penyewaan mobil. Dengan adanya program tersebut dapat mempermudah customer dalam memilih dan menyewa mobil dengan model dan harga yang di inginkan. Pada program sederhana mengenai Rental mobil ini melibatkan class Pegawai & Pemilik yang terdapat pada Package Controller, Class Main yang terdapat pada Package Main dan Class login, class Mobil dan Class Penyewa yang terdapat pada Package Model. <br>
+Pada class Pegawai menggunakan information hidding yaitu String naam dan List penyewa lalu terdapat Overload Constructor Pegawai selanjutnya getter dan setter atribut information hidding. Setelah ituu terdapat method hapus penyewa dengan parameter penyewa dan penggunaan try - catch dengan proses perulangan int j = 0, j < dari list penyewa j akan di increment kan. Lalu terdapat method tambahpenyewa dan getpenyewa yang dimana dalam getpenyewa menggunakan try catch dan perulangan yang dimulai dari 0 jika i < lis penyewa maka i akan di increment kan. 
