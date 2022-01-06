@@ -440,7 +440,7 @@ public class Main {
                             ulangi = true;
                         } else {
                             ulangi = false;
-                            afterLoginPegawai(namaPegawai);
+                            afterLoginPemilik();
                         }
 
                     } else {
@@ -473,7 +473,7 @@ public class Main {
                             ulangi = true;
                         } else {
                             ulangi = false;
-                            afterLoginPegawai(namaPegawai);
+                            afterLoginPemilik();
                         }
 
                     } else {
@@ -526,7 +526,7 @@ public class Main {
                             ulangi = true;
                         } else {
                             ulangi = false;
-                            afterLoginPegawai(namaPegawai);
+                            afterLoginPemilik();
                         }
                     } else {
                         System.out.println("Gagal! tidak ada penyewa dengan nama "+nama);
@@ -555,7 +555,7 @@ public class Main {
                             ulangi = true;
                         } else {
                             ulangi = false;
-                            afterLoginPegawai(namaPegawai);
+                            afterLoginPemilik();
                         }
                     } else {
                         System.out.println("Gagal! tidak ada penyewa dengan nama "+nama);
