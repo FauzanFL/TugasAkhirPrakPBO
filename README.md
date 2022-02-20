@@ -4,10 +4,12 @@
 
 ### KELOMPOK <br>
 
-Aditya Rizkiawan Nugraha 20104006 <br>
-Daffa Rayhan Riadi       20104023 <br>
-Fauzan Fashihul Lisan    20104029 <br>
-Hastin Ajeng Shalma      20104030 <br>
+|NAMA|NIM|
+|---|---|
+|Aditya Rizkiawan Nugraha|20104006|
+|Daffa Rayhan Riadi|20104023|
+|Fauzan Fashihul Lisan|20104029|
+|Hastin Ajeng Shalma|20104030|
 
 <hr>
 
